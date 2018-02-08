@@ -1,5 +1,6 @@
 # MemsetVsBrace
 
+## Benchmark
 Running the benchmark (MemsetVsBraceBenchmark) should result in something like:
 
 | Benchmark | Time | CPU | Iterations |
@@ -27,6 +28,8 @@ Running the benchmark (MemsetVsBraceBenchmark) should result in something like:
 | BM_braces/4096 | 199 ns | 201 ns | 3516231 |
 | BM_braces/8192 | 197 ns | 199 ns | 3519896 |
 
+
+## Disassembly
 Disassembling the other executable (MemsetVsBrace) gives something the following ASM code:
 ```assembly
 0000000000400428 <_init>:
@@ -236,7 +239,10 @@ Disassembly of section .fini:
   400688:       48 83 c4 08             add    $0x8,%rsp
   40068c:       c3                      retq 
 ```
+Looking through the ASM code one can see that using braces leads to compile time *mov* instructions, while using a memset leads to a *lea* and a *call*, besides the other *mov*s. Memset brings another small overhead in terms of binary size (the size of its instructions).
 
+
+## Info
 Compilation of MemsetVsBrace: 
 ```zsh
 gcc -std=c++11 memset_vs_brace.cpp -o MemsetVsBrace
