@@ -1,7 +1,8 @@
-#include <benchmark/benchmark.h>
+//
+// Created by virgil on 08.02.2018.
+//
 
-#include <cstdint>
-#include <cstdio>
+#include <benchmark/benchmark.h>
 #include <cstring>
 
 struct S
